@@ -1,4 +1,4 @@
-# Group_i_Website-PCM-Baki
+# Group_i_Website-PCM-Todanan
 Dokumentasi Profil PCM Todanan
 
 Repository ini berisi data dan dokumen resmi Pimpinan Cabang Muhammadiyah (PCM) Todanan untuk keperluan tugas kuliah Pemrograman Web berbasis Framework.
