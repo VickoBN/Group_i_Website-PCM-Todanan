@@ -1,0 +1,40 @@
+﻿{% extends 'base.html' %}
+{% block title %}Agenda Kegiatan - PCM{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="fw-bold mb-4">Agenda & Kegiatan</h2>
+    <h4 class="text-primary mb-3">Agenda Mendatang</h4>
+    <div class="row mb-5">
+        {% for item in agenda_mendatang %}
+            <div class="col-md-6 mb-3">
+                <div class="card shadow-sm border-start border-primary border-4">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ item.nama_kegiatan }}</h5>
+                        <p class="mb-1 text-muted small"><i class="fa-regular fa-clock me-2"></i>{{ item.waktu_mulai|date:"d F Y, H:i" }} WIB</p>
+                        <p class="mb-2 text-muted small"><i class="fa-solid fa-location-dot me-2"></i>{{ item.tempat }}</p>
+                        <p class="card-text small">{{ item.keterangan }}</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-muted">Belum ada agenda mendatang.</div>
+        {% endfor %}
+    </div>
+
+    <h4 class="text-secondary mb-3">Agenda Terlewati</h4>
+    <div class="row">
+        {% for item in agenda_lampau %}
+            <div class="col-md-6 mb-3">
+                <div class="card bg-light border-0">
+                    <div class="card-body">
+                        <h6 class="fw-bold">{{ item.nama_kegiatan }}</h6>
+                        <small class="text-muted d-block"><i class="fa-regular fa-clock me-1"></i>{{ item.waktu_mulai|date:"d M Y" }} - {{ item.tempat }}</small>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-muted small">Belum ada riwayat agenda terlewati.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+﻿{% extends 'base.html' %}
+{% block title %}Berita & Artikel - PCM{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="fw-bold mb-4">Berita & Artikel</h2>
+    <div class="row">
+        {% for berita in page_obj %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    {% if berita.gambar_sampul %}
+                        <img src="{{ berita.gambar_sampul.url }}" class="card-img-top" alt="{{ berita.judul }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <small class="text-muted"><i class="fa-regular fa-calendar me-1"></i>{{ berita.tanggal_terbit|date:"d M Y" }}</small>
+                        <h5 class="card-title mt-2">{{ berita.judul }}</h5>
+                        <p class="card-text text-muted small">{{ berita.ringkasan|truncatewords:15 }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3">
+                        <a href="{% url 'pcm_app:berita_detail' berita.slug %}" class="btn btn-sm btn-primary">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-muted">Belum ada berita terbit.</div>
+        {% endfor %}
+    </div>
+    {% if page_obj.has_other_pages %}
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Sebelumnya</a></li>
+                {% endif %}
+                <li class="page-item disabled"><span class="page-link">Halaman {{ page_obj.number }} dari {{ page_obj.paginator.num_pages }}</span></li>
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Selanjutnya</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+{% endblock %}

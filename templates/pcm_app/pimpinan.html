@@ -1,0 +1,25 @@
+﻿{% extends 'base.html' %}
+{% block title %}Struktur Pimpinan - PCM{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="fw-bold mb-4">Struktur Pimpinan Cabang</h2>
+    <div class="row">
+        {% for pimpinan in daftar_pimpinan %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm text-center border-0">
+                    {% if pimpinan.foto %}
+                        <img src="{{ pimpinan.foto.url }}" class="card-img-top" alt="{{ pimpinan.nama }}" style="height: 250px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-1">{{ pimpinan.nama }}</h5>
+                        <p class="text-primary small mb-1">{{ pimpinan.jabatan }}</p>
+                        <small class="text-muted">Periode: {{ pimpinan.periode }}</small>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-muted">Belum ada data pimpinan.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

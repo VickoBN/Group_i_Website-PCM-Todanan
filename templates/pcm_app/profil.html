@@ -1,0 +1,32 @@
+﻿{% extends 'base.html' %}
+{% block title %}Profil - PCM{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="fw-bold mb-4">Profil Organisasi</h2>
+    {% if profil %}
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h4>Tentang Kami</h4>
+                <p>{{ profil.tentang|linebreaks }}</p>
+                <h4 class="mt-4">Sejarah</h4>
+                <p>{{ profil.sejarah|linebreaks }}</p>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 bg-light">
+                    <h5>Visi & Misi</h5>
+                    <strong class="d-block mt-2">Visi:</strong>
+                    <p class="small text-muted">{{ profil.visi }}</p>
+                    <strong class="d-block mt-2">Misi:</strong>
+                    <ul class="small ps-3 text-muted">
+                        {% for misi in misi_list %}
+                            <li>{{ misi }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info">Profil organisasi belum diisi di Admin.</div>
+    {% endif %}
+</div>
+{% endblock %}

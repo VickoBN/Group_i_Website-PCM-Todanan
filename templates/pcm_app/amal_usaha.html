@@ -1,0 +1,28 @@
+﻿{% extends 'base.html' %}
+{% block title %}Amal Usaha - PCM{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="fw-bold mb-4">Amal Usaha Muhammadiyah (AUM)</h2>
+    {% for bidang, items in aum_by_bidang.items %}
+        {% if items %}
+            <h4 class="mt-4 mb-3 text-primary border-bottom pb-2">{{ bidang }}</h4>
+            <div class="row">
+                {% for aum in items %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            {% if aum.gambar %}
+                                <img src="{{ aum.gambar.url }}" class="card-img-top" alt="{{ aum.nama }}" style="height: 180px; object-fit: cover;">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">{{ aum.nama }}</h5>
+                                <p class="card-text small text-muted">{{ aum.deskripsi }}</p>
+                                <p class="card-text small"><i class="fa-solid fa-location-dot me-2"></i>{{ aum.alamat }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

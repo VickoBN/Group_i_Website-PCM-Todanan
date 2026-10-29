@@ -1,0 +1,31 @@
+﻿{% extends 'base.html' %}
+{% block title %}{{ berita.judul }} - PCM{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <h2 class="fw-bold mb-3">{{ berita.judul }}</h2>
+            <p class="text-muted small mb-4"><i class="fa-regular fa-calendar me-1"></i>{{ berita.tanggal_terbit|date:"d F Y, H:i" }} WIB</p>
+            {% if berita.gambar_sampul %}
+                <img src="{{ berita.gambar_sampul.url }}" class="img-fluid rounded mb-4 w-100" style="max-height: 400px; object-fit: cover;" alt="{{ berita.judul }}">
+            {% endif %}
+            <div class="content mb-5">
+                {{ berita.isi|linebreaks }}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <h5 class="fw-bold mb-3">Berita Lainnya</h5>
+            <ul class="list-group list-group-flush">
+                {% for item in berita_lain %}
+                    <li class="list-group-item ps-0">
+                        <a href="{% url 'pcm_app:berita_detail' item.slug %}" class="text-decoration-none text-dark fw-semibold">{{ item.judul }}</a>
+                        <br><small class="text-muted">{{ item.tanggal_terbit|date:"d M Y" }}</small>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item ps-0 text-muted small">Tidak ada berita lain.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

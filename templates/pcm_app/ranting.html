@@ -1,0 +1,25 @@
+﻿{% extends 'base.html' %}
+{% block title %}Daftar Ranting - PCM{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="fw-bold mb-4">Pimpinan Ranting Muhammadiyah (PRM)</h2>
+    <div class="row">
+        {% for ranting in daftar_ranting %}
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary">{{ ranting.nama_ranting }}</h5>
+                        <p class="card-text mb-1"><i class="fa-solid fa-user me-2"></i>Ketua: {{ ranting.ketua }}</p>
+                        <p class="card-text small text-muted mb-1"><i class="fa-solid fa-location-dot me-2"></i>{{ ranting.alamat }}</p>
+                        {% if ranting.telepon %}
+                            <p class="card-text small text-muted"><i class="fa-solid fa-phone me-2"></i>{{ ranting.telepon }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-muted">Belum ada data ranting terdaftar.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
